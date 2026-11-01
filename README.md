@@ -106,7 +106,7 @@ PAT: Applied patch (hash='PPU-5dd8d3683fb219af941b921ed2280bfaaa49e30a', descrip
 
 - Tested on RPCS3 0.0.43-20550 (Linux AppImage, LLVM): Silent Hill 3 gets past the hang, starts its sound
   loader and starts the opening movie (opens `movie/op.bik` and spins up its Bink threads) about 12 s after launch.
-  It used to hang at about 4 s.
+  It used to hang at about 4 s. Also confirmed in normal play: launcher → Silent Hill 3 → the game runs.
 - Silent Hill 2 doesn't need it; the patch only touches `sh3game`.
 - **Not covered:** the disc's own v01.00 `sh3game` (a different build, so a different hash and possibly different
   addresses) and the EU release (`BLES01504`). Both very likely have the same race. To port the patch, find the same
