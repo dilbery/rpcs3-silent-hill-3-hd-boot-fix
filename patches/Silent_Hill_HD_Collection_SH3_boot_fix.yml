@@ -1,0 +1,18 @@
+Version: 1.2
+
+# Silent Hill HD Collection (US, BLUS30810, v01.02 update) - Silent Hill 3 hangs right after its trophy check.
+# See README.md for the full root cause. Short version: an early asset lookup runs before the patch-directory root
+# string is written (RPCS3's HLE cellGame functions are deliberately slow), stats "/sh3/data/chr/pl/chhaa.mdl",
+# gets CELL_ENOTMOUNTED instead of CELL_FS_ENOENT and calls the game's fatal media-error handler. These two NOPs make
+# an error on the patch-dir / HDD-install roots behave like "file not here, try the next root" (the disc check is kept).
+PPU-5dd8d3683fb219af941b921ed2280bfaaa49e30a:
+  "Fix Silent Hill 3 hanging after the trophy check (startup race)":
+    Games:
+      "Silent Hill HD Collection":
+        BLUS30810: [ All ]
+    Author: "dilbery"
+    Notes: "Silent Hill 3 never gets past the trophy check (stuck on the HD Collection art). Caused by an early asset lookup racing the patch-dir path setup; errors on the patch/HDD roots now fall through to the next root like ENOENT."
+    Patch Version: 1.0
+    Patch:
+      - [ be32, 0x0001DF14, 0x60000000 ] # nop: bl fatal_media_error (patch-dir root stat)
+      - [ be32, 0x0001DFE8, 0x60000000 ] # nop: bl fatal_media_error (HDD-install root stat)

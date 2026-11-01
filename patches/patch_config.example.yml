@@ -1,0 +1,9 @@
+# Only needed for a manual install: this enables the patch. Merge it into RPCS3's patch_config.yml
+# (next to config.yml, e.g. ~/.config/rpcs3/patch_config.yml on Linux). Ticking the patch in
+# Manage > Game Patches writes exactly this for you.
+PPU-5dd8d3683fb219af941b921ed2280bfaaa49e30a:
+  "Fix Silent Hill 3 hanging after the trophy check (startup race)":
+    "Silent Hill HD Collection":
+      BLUS30810:
+        All:
+          Enabled: true
